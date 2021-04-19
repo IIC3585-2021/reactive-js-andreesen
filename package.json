@@ -1,14 +1,12 @@
 {
-  "name": "rxjs-breakout",
+  "name": "rxjs-breakout-andersen",
   "version": "1.0.0",
-  "description": "RxJS Breakout Implementation",
+  "description": "web avanzado",
   "scripts": {
     "start": "budo app.js:index.js --live --open -- -t [ babelify --presets [ es2015 ] ]"
   },
   "author": {
-    "name": "Manuel Wieser",
-    "email": "office@manuelwieser.com",
-    "url": "http://manu.ninja/"
+    "name": "Andersen"
   },
   "license": "MIT",
   "devDependencies": {
