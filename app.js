@@ -5,14 +5,13 @@ import Rx from 'rx';
 
 const canvas = document.getElementById('stage');
 const context = canvas.getContext('2d');
-//context.fillStyle = 'pink';
 
-const PADDLE_WIDTH = 100;
+const PADDLE_WIDTH = 150;
 const PADDLE_HEIGHT = 20;
 
 const BALL_RADIUS = 10;
 
-const BRICK_ROWS = 5;
+const BRICK_ROWS = 8;
 const BRICK_COLUMNS = 7;
 const BRICK_HEIGHT = 20;
 const BRICK_GAP = 3;
@@ -25,11 +24,25 @@ function drawTitle() {
     
 }
 
-function drawControls() {
+function drawControlsP1() {
     context.textAlign = 'center';
     context.font = '16px Courier New';
-    context.fillStyle = 'blue';
-    context.fillText('press [<] and [>] to play', canvas.width / 2, canvas.height / 2);
+    context.fillStyle = 'cyan';
+    context.fillText('P1: [<] and [>] to play', canvas.width / 2, canvas.height / 2);
+}
+
+function drawControlsP2() {
+    context.textAlign = 'center';
+    context.font = '16px Courier New';
+    context.fillStyle = 'pink';
+    context.fillText('P2: [a] and [d] to play', canvas.width / 2, canvas.height / 2 + 24);
+}
+
+function drawStartGame() {
+    context.textAlign = 'center';
+    context.font = '16px Courier New';
+    context.fillStyle = 'pink';
+    context.fillText('Press Any Key To Start Game', canvas.width / 2, canvas.height / 2 + 48);
 }
 
 function drawGameOver(text) {
@@ -37,12 +50,6 @@ function drawGameOver(text) {
     context.textAlign = 'center';
     context.font = '24px Courier New';
     context.fillText(text, canvas.width / 2, canvas.height / 2);
-}
-
-function drawAuthor() {
-    context.textAlign = 'center';
-    context.font = '16px Courier New';
-    context.fillText('by Manuel Wieser', canvas.width / 2, canvas.height / 2 + 24);
 }
 
 function drawScore(score) {
@@ -53,7 +60,7 @@ function drawScore(score) {
 
 function drawPaddle(position) {
     context.beginPath();
-    context.fillStyle = 'red';
+    context.fillStyle = 'cyan';
     context.rect(
         position - PADDLE_WIDTH / 2,
         context.canvas.height - PADDLE_HEIGHT,
@@ -66,7 +73,7 @@ function drawPaddle(position) {
 
 function drawPaddle_2(position) {
     context.beginPath();
-    context.fillStyle = 'blue';
+    context.fillStyle = 'pink';
     context.rect(
         position - PADDLE_WIDTH / 2,
         context.canvas.height - PADDLE_HEIGHT,
@@ -86,11 +93,13 @@ function drawBall(ball) {
     context.beginPath();
     context.arc(ball.position.x, ball.position.y, BALL_RADIUS, 0, Math.PI * 2);
     context.fill();
+    context.fillStyle = "red";
     context.closePath();
 }
 
 function drawBrick(brick) {
     context.beginPath();
+    context.fillStyle = "yellow";
     context.rect(
         brick.x - brick.width / 2,
         brick.y - brick.height / 2,
@@ -208,7 +217,7 @@ const paddle_2$ = ticker$
 
 /* Ball */
 
-const BALL_SPEED = 60;
+const BALL_SPEED = 100;
 const INITIAL_OBJECTS = {
     ball: {
         position: {
@@ -311,8 +320,9 @@ function collision(brick, ball) {
 /* Game */
 
 drawTitle();
-drawControls();
-drawAuthor();
+drawControlsP1();
+drawControlsP2();
+drawStartGame();
 
 function update([ticker, paddle, paddle_2, objects]) {
 
